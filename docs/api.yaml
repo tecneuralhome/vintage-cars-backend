@@ -5,6 +5,7 @@ info:
   description: API documentation for Vintage Cars
 servers:
   - url: http://54.160.212.90:8080
+  - url: http://localhost:8080
 components:
   securitySchemes:
     JwtAuth:
@@ -327,9 +328,24 @@ paths:
       summary: Get the car's information lists.
       description: API to get car's information lists with pagination.
       parameters:
-          page:
+          - name: page
             in: query
-            description: Page number for pagination.
+            description: Page number (optional default value is 1)
+            required: false
+            schema:
+              type: number
+          - name: limit
+            in: query
+            description: Number of data (optional default value is 10)
+            required: false
+            schema:
+              type: number
+          - name: id
+            in: query
+            description: car id optional
+            required: false
+            schema:
+              type: number
       responses:
         200:
           description: Successfully retrieved the car's info list.
@@ -349,3 +365,211 @@ paths:
                   cars:
                     description: List of cars
                     example: []
+                  totalCount:
+                    type: number
+                    description: Total number of documents
+                    example: 1
+  /cars/slider-list/:
+    get:
+      summary: Get the slider's lists.
+      description: API to get slider's lists
+      responses:
+        200:
+          description: Successfully retrieved the sliders list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    description: Indicates success
+                    example: true
+                  message:
+                    type: string
+                    description: A success message
+                    example: "Successfully retrieved the sliders list"
+                  cars:
+                    description: List of slides
+                    example: []
+  /cars/delete-slider-info/:
+    delete:
+      summary: Delete slider information
+      description: API to delete slider information
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: string
+                  description: enter slider information id
+                  example: "67807868c77bd7a9321fa27e"
+      responses:
+        200:
+          description: result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    description: Indicates success
+                    example: true
+                  message:
+                    type: string
+                    description: result message
+                    example: "1 Slider info is deleted successfully"
+  /cars/delete-car-info/:
+    delete:
+      summary: Delete car information
+      description: API to delete car information
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: string
+                  description: enter slider information id
+                  example: "67807868c77bd7a9321fa27e"
+      responses:
+        200:
+          description: result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    description: Indicates success
+                    example: true
+                  message:
+                    type: string
+                    description: result message
+                    example: "1 Car info is deleted successfully"
+  /cars/booking/:
+    post:
+      summary: booking car
+      description: API to booking car
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  description: enter the user name
+                  example: "username"
+                email:
+                  type: email
+                  description: enter the user email
+                  example: "example@gmail.com"
+                number:
+                  type: number
+                  description: enter the user number
+                  example: "6382987510"
+                eventdate:
+                  type: string
+                  description: enter the event date
+                  example: "11/11/2025"
+                from:
+                  type: string
+                  description: enter the from location
+                  example: "Madurai, Tamil nadu"
+                to:
+                  type: string
+                  description: enter the to location
+                  example: "Chennai, Tamil nadu"
+                carname:
+                  type: string
+                  description: enter the car name
+                  example: "Dzire"
+      responses:
+        200:
+          description: car booking result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    description: Indicates success
+                    example: true
+                  message:
+                    type: string
+                    description: result message
+                    example: "Car booked successfully! Details are on their way to your inbox."
+  /cars/booking-list/:
+    get:
+      summary: Get the booking lists.
+      description: API to get booking lists
+      parameters:
+          - name: page
+            in: query
+            description: Page number (optional default value is 1)
+            required: false
+            schema:
+              type: number
+          - name: limit
+            in: query
+            description: Number of data (optional default value is 10)
+            required: false
+            schema:
+              type: number
+          - name: carname
+            in: query
+            description: car name optional
+            required: false
+            schema:
+              type: string
+          - name: from
+            in: query
+            description: from date optional
+            required: false
+            schema:
+              type: string
+          - name: to
+            in: query
+            description: to date optional
+            required: false
+            schema:
+              type: string
+      responses:
+        200:
+          description: Successfully retrieved the booking list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    description: Indicates success
+                    example: true
+                  message:
+                    type: string
+                    description: A success message
+                    example: "Successfully retrieved the booking list."
+                  bookinglist:
+                    description: List of bookings
+                    example: []
+                  totalCount:
+                    type: number
+                    description: Total number of documents
+                    example: 1
