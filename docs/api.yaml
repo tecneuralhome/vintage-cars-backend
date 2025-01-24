@@ -168,9 +168,6 @@ paths:
     get:
       summary: Get the user's account with info lists.
       description: API to get user's account with information list
-      responses:
-        200:
-          description: Successfully retrieved the users list
       parameters:
           - name: page
             in: query
@@ -184,6 +181,9 @@ paths:
             required: false
             schema:
               type: number
+      responses:
+        200:
+          description: Successfully retrieved the users list
           content:
             application/json:
               schema:
