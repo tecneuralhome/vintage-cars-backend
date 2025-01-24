@@ -6,6 +6,7 @@ const Yaml = require('yamljs');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = Yaml.load("./docs/api.yaml");
 const dotenv = require("dotenv");
+const path = require('path');
 dotenv.config();
 const config = require("./config/config")
 var userRoute = require("./routes/userRoute");
@@ -27,6 +28,10 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(cors({origin: '*'}));
 // app.use(cors({origin: 'http://localhost:4200'}));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'dist/vintage-cars-frontend/browser/index.html')));
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist/vintage-cars-frontend/browser/index.html'));
+});
 app.use('/cars', carRoute);
 app.use('/user', userRoute);
 
