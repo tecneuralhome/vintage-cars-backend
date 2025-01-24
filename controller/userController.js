@@ -67,6 +67,7 @@ exports.generateOTP = async function (req, res) {
       message:`Verification code is ${otpCode}`,
     })
   }).catch((error) => {
+    console.log("--- ERROR -----", error)
     res.status(500).json({
       status:false,
       message:"An error occurred while inserting OTP records."
