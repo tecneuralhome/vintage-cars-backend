@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   description: API documentation for Vintage Cars
 servers:
-  - url: http://localhost:8080
+  - url: http://54.160.212.90:8080
 components:
   securitySchemes:
     JwtAuth:
@@ -322,3 +322,30 @@ paths:
                     type: string
                     description: A success message
                     example: "2 user(s) deleted successfully"
+  /cars/car-list/:
+    get:
+      summary: Get the car's information lists.
+      description: API to get car's information lists with pagination.
+      parameters:
+          page:
+            in: query
+            description: Page number for pagination.
+      responses:
+        200:
+          description: Successfully retrieved the car's info list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    description: Indicates success
+                    example: true
+                  message:
+                    type: string
+                    description: A success message
+                    example: "Successfully retrieved the car's info list."
+                  cars:
+                    description: List of cars
+                    example: []
