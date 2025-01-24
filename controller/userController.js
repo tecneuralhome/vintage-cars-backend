@@ -8,11 +8,12 @@ const bcrypt = require('bcrypt')
 
 // This function is used to sign in a user account with an email and password.
 exports.signIn = function (req, res) {
-  User.findOne({ email: req.body.email }).then((user) => {
+  let filter = req.body.email ? { email: req.body.email } : { number: req.body.number }
+  User.findOne(filter).then((user) => {
     if(!user) {
       res.status(400).json({
         status:false,
-        message:`We can't find an account with ${req.body.email}. Try another email address`,
+        message:`We can't find an account with ${req.body.email ? req.body.email : req.body.number}. Try another ${req.body.email ? 'email address' : 'mobile number'}`,
       })
     } else if(user.comparePassword(req.body.password, (error,match) =>{
       if (!match) {

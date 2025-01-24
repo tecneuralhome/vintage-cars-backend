@@ -171,6 +171,19 @@ paths:
       responses:
         200:
           description: Successfully retrieved the users list
+      parameters:
+          - name: page
+            in: query
+            description: Page number (optional default value is 1)
+            required: false
+            schema:
+              type: number
+          - name: limit
+            in: query
+            description: Number of data (optional default value is 10)
+            required: false
+            schema:
+              type: number
           content:
             application/json:
               schema:
