@@ -40,6 +40,7 @@ exports.signIn = function (req, res) {
 
 // This function is used to send a one-time password to the user's contact.
 exports.generateOTP = async function (req, res) {
+  console.log("===== REQUEST RECIVED 1 =====", req.body);
   if (req.body.type !== "register" && req.body.type !== "update") {
     return res.status(400).json({
       status:false,
@@ -67,7 +68,7 @@ exports.generateOTP = async function (req, res) {
       message:`Verification code is ${otpCode}`,
     })
   }).catch((error) => {
-    console.log("--- ERROR -----", error)
+    console.log("--- ERROR -----", error);
     res.status(500).json({
       status:false,
       message:"An error occurred while inserting OTP records."
