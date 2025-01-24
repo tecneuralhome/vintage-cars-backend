@@ -5,6 +5,8 @@ const commonUtils = require('../utils/commonUtils');
 const geolib = require("geolib");
 const axios = require("axios")
 
+const recoveryVanCharge = 100;
+
 // This function is used to register car information.
 exports.registerCarInfo = async function (req, res) {
 	if (req.files && req.files.length > 0 && await commonUtils.isAdmin(req.decoded.userId)) {
@@ -179,7 +181,7 @@ exports.deleteCarInfo = async function (req, res) {
 exports.booking = async function (req, res) {
 	const distance = await getDistance(req.body.from, req.body.to);
 	let amount = await getPricingByName(req.body.carname);
-	if (distance > 100) amount += 100;
+	if (distance > 100) amount += recoveryVanCharge;
 	if (distance === 0 || amount === 0) {
 		res.status(400).json({
 			status: false,
