@@ -159,6 +159,10 @@ paths:
                     type: string
                     description: A success message
                     example: "Successfully Login"
+                  usertype:
+                    type: string
+                    description: user type admin or user
+                    example: "user"
                   token:
                     type: string
                     nullable: true

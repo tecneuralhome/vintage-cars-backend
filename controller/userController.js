@@ -32,6 +32,7 @@ exports.signIn = function (req, res) {
         res.status(200).json({
           status:true,
           message:"Successfully Login",
+          usertype: user.usertype,
           token,
         })
       }
