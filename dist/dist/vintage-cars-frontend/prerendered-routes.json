@@ -1,0 +1,10 @@
+{
+  "routes": {
+    "/": {},
+    "/add-cars": {},
+    "/detail-page": {},
+    "/login": {},
+    "/notifications": {},
+    "/register": {}
+  }
+}
