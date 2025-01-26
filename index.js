@@ -28,14 +28,14 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(cors({origin: '*'}));
 // app.use(cors({origin: 'http://localhost:4200'}));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/cars', carRoute);
+app.use('/user', userRoute);
 // app.use("/assets", express.static(path.join(__dirname, 'dist/test/browser/assets')));
 app.use("/assets", express.static(path.join(__dirname, 'dist/dist/vintage-cars-frontend/browser/assets')));
 app.use(express.static(path.join(__dirname, 'dist/dist/vintage-cars-frontend/browser')));
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist/dist/vintage-cars-frontend/browser/index.html'));
 });
-app.use('/cars', carRoute);
-app.use('/user', userRoute);
 
 app.set("port", config.port);
 app.listen(app.get("port"), () =>
