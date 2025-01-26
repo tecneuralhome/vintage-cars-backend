@@ -7,39 +7,6 @@ var authValidation = require('../middleWare/authValidation')
 const bcrypt = require('bcrypt')
 const { MongoClient } = require('mongodb');
 
-
-const uri = 'mongodb://localhost:27017'; // Replace with your MongoDB connection string
-const dbName = 'vintageCarsDB';
-const collectionName = 'cars';
-async function deleteCollection() {
-  const client = new MongoClient(uri);
-
-  try {
-    // Connect to the MongoDB server
-    await client.connect();
-    console.log('Connected to MongoDB');
-
-    // Select the database
-    const db = client.db(dbName);
-
-    // Drop the collection using `dropCollection`
-    const result = await db.dropCollection(collectionName);
-    if (result) {
-      console.log(`Collection "${collectionName}" deleted successfully.`, result);
-    }
-  } catch (error) {
-    if (error.codeName === 'NamespaceNotFound') {
-      console.log(`Collection "${collectionName}" does not exist.`);
-    } else {
-      console.error('Error deleting collection:', error);
-    }
-  } finally {
-    // Close the connection
-    await client.close();
-    console.log('MongoDB connection closed');
-  }
-}
-deleteCollection()
 // This function is used to sign in a user account with an email and password.
 exports.signIn = function (req, res) {
   let filter = req.body.email ? { email: req.body.email } : { number: req.body.number }

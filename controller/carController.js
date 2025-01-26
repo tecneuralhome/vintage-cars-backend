@@ -14,6 +14,7 @@ exports.registerCarInfo = async function (req, res) {
 		req.files.forEach((file) => {
           fileNames.push(file.path);
         });
+        console.log("req.body", req.body)
 		var carInfo = new Car({
 			name: req.body.name,
 		    model: req.body.model,
@@ -24,11 +25,13 @@ exports.registerCarInfo = async function (req, res) {
 		    pagecontent: req.body.about_car,
 		});
 		carInfo.save().then(async (result) => {
+			console.log("CAR INFO RESULT", result);
 			res.status(200).json({
 				status:true,
 	        	message:"Successfully Registered",
 	      	})
 	    }).catch((error) => {
+	    	console.log("error", error);
 	      res.status(500).json({
 	        status:false,
 	        message:"An error occurred while registering car info.",
