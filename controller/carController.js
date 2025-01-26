@@ -21,7 +21,7 @@ exports.registerCarInfo = async function (req, res) {
 		    brand: req.body.brand,
 		    color: req.body.color,
 		    image: fileNames,
-		    pagecontent: req.body.pagecontent,
+		    pagecontent: req.body.about_car,
 		});
 		carInfo.save().then(async (result) => {
 			res.status(200).json({
