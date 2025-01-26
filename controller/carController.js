@@ -21,6 +21,7 @@ exports.registerCarInfo = async function (req, res) {
 		    brand: req.body.brand,
 		    color: req.body.color,
 		    image: fileNames,
+		    pagecontent: req.body.pagecontent,
 		});
 		carInfo.save().then(async (result) => {
 			res.status(200).json({
@@ -100,6 +101,7 @@ exports.getCarsInfo = async function (req, res) {
 			brand: result[i].brand,
 			color: result[i].color,
 			image: result[i].image,
+			pagecontent: result[i].pagecontent,
 			createdAt: result[i].createdAt,
 		})
     }
