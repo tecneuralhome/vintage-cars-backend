@@ -40,7 +40,7 @@ exports.registerCarInfo = async function (req, res) {
 	} else {
 		res.status(400).json({
 			status:false,
-        	message: !req.file ? "Image data is required" : "Access denied",
+        	message: !req.files ? "Image data is required" : "Access denied",
         })
 	}
 }
