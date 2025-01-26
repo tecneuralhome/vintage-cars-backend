@@ -1,10 +1,9 @@
 {
   "routes": {
     "/": {},
+    "/Home-page": {},
     "/add-cars": {},
     "/detail-page": {},
-    "/login": {},
-    "/notifications": {},
-    "/register": {}
+    "/notifications": {}
   }
 }
