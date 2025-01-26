@@ -30,7 +30,7 @@ const upload = multer({
 
 router.post('/register-car-info', authValidation, upload.array("images"), carModuleValidation.carInfoValidation, controller.registerCarInfo);
 router.post('/register-slider-info', authValidation, upload.single("images"), carModuleValidation.sliderInfoValidation, controller.registerSliderInfo);
-router.get('/car-list', authValidation, controller.getCarsInfo);
+router.get('/car-list', controller.getCarsInfo);
 router.get('/slider-list', authValidation, controller.getSlidersInfo);
 router.delete('/delete-slider-info', authValidation, controller.deleteSliderInfo);
 router.delete('/delete-car-info', authValidation, controller.deleteCarInfo);
