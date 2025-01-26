@@ -362,7 +362,7 @@ paths:
             description: car id optional
             required: false
             schema:
-              type: number
+              type: string
       responses:
         200:
           description: Successfully retrieved the car's info list.

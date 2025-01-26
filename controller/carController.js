@@ -234,7 +234,7 @@ exports.bookingList = async function (req, res) {
 	    const limit = parseInt(req.query.limit) || 10; // Default to 10 if not provided
 	    const skip = (page - 1) * limit;
 	    const [result, totalBooking] = await Promise.all([
-	        Booking.find(filter).skip(skip).limit(limit),Car.countDocuments(),
+	        Booking.find(filter).skip(skip).limit(limit),Booking.countDocuments(),
 	    ]);
 	    let bookinglist = []
 	    for (let i = 0; i < result.length; i++) {
