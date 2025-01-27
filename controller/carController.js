@@ -291,3 +291,43 @@ const getDistance = async(from, to) => {
 	const distanceInKilometers  = geolib.getDistance(fromLocation, toLocation) / 1000;
 	return distanceInKilometers;
 };
+
+// This function is used to register car information.
+exports.updateCarInfo = async function (req, res) {
+	if (await commonUtils.isAdmin(req.decoded.userId)) {
+        console.log("req.body", req.body)
+        let updatedData = {
+        	name: req.body.name,
+        	model: req.body.model,
+		    price: req.body.price,
+		    brand: req.body.brand,
+		    color: req.body.color,
+		    pagecontent: req.body.about_car,
+		}
+		if (req.files) {
+			let fileNames = []
+			req.files.forEach((file) => {
+				fileNames.push(file.path);
+			});
+			updatedData.image = fileNames;
+		}
+        Car.updateOne({ _id: req.body.id }, { $set: updatedData}).then((result) => {
+        	console.log("----- CAR INFO UPDATE RESULT -----", result);
+		    res.status(200).json({
+		      status:true,
+		      message:`Successfully updated car information`,
+		    })
+		}).catch((error) => {
+			console.log("UPDATE CAR INFO ERROR", error);
+			res.status(500).json({
+				status:false,
+				message:"An error occurred while updating car information.",
+			})
+		})	
+	} else {
+		res.status(400).json({
+			status:false,
+        	message: "Access denied",
+        })
+	}
+}

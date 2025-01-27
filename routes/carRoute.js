@@ -29,6 +29,7 @@ const upload = multer({
 });
 
 router.post('/register-car-info', authValidation, upload.array("images"), carModuleValidation.carInfoValidation, controller.registerCarInfo);
+router.put('/update-car-info', authValidation, upload.array("images"), carModuleValidation.carInfoValidation, controller.updateCarInfo);
 router.post('/register-slider-info', authValidation, upload.single("images"), carModuleValidation.sliderInfoValidation, controller.registerSliderInfo);
 router.get('/car-list', controller.getCarsInfo);
 router.get('/slider-list', authValidation, controller.getSlidersInfo);
