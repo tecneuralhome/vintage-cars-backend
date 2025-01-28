@@ -53,10 +53,10 @@ exports.updateUserInfoValidation =
 [
 	// Validate username
 	check('username').trim().notEmpty().withMessage('Username is required').isLength({min:6, max:15}).withMessage('Username must be between 6 and 15 characters'),
-	// Validate password
-	check('password').isLength({min:6, max:15}).withMessage('Password must be between 6 and 15 characters'),
-	// base64 validation
-	check('image').trim().notEmpty().withMessage("Base64 string is required").bail().isBase64().withMessage("Invalid Base64 format"),
+	// // Validate password
+	// check('password').isLength({min:6, max:15}).withMessage('Password must be between 6 and 15 characters'),
+	// // base64 validation
+	// check('image').trim().notEmpty().withMessage("Base64 string is required").bail().isBase64().withMessage("Invalid Base64 format"),
 	// Middleware to handle validation results
 	(req, res, next) => {
 		const errors = validationResult(req);
