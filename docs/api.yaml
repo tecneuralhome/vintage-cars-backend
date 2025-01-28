@@ -443,7 +443,7 @@ paths:
                     description: result message
                     example: "1 Slider info is deleted successfully"
   /cars/delete-car-info/:
-    delete:
+    post:
       summary: Delete car information
       description: API to delete car information
       requestBody:

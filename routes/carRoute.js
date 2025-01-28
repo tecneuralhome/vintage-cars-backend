@@ -34,7 +34,7 @@ router.post('/register-slider-info', authValidation, upload.single("images"), ca
 router.get('/car-list', controller.getCarsInfo);
 router.get('/slider-list', authValidation, controller.getSlidersInfo);
 router.delete('/delete-slider-info', authValidation, controller.deleteSliderInfo);
-router.delete('/delete-car-info', authValidation, controller.deleteCarInfo);
+router.post('/delete-car-info', authValidation, controller.deleteCarInfo);
 router.post('/booking', authValidation, carModuleValidation.bookingValidation, controller.booking);
 router.get('/booking-list', authValidation, controller.bookingList);
 module.exports = router
