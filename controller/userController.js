@@ -184,8 +184,8 @@ exports.deleteUsers = async function (req, res) {
 exports.updateUserInfo = async function (req, res) {
   User.updateOne({ _id: req.decoded.userId }, { $set: {
     username: req.body.username,
-    password: bcrypt.hashSync(req.body.password, 10),
-    image: req.body.image,
+    // password: bcrypt.hashSync(req.body.password, 10),
+    // image: req.body.image,
   }}).then((result) => {
     let token = commonUtils.generateToken({
       id: req.decoded.userId,
