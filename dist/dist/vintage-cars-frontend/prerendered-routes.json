@@ -3,7 +3,9 @@
     "/": {},
     "/Home-page": {},
     "/add-cars": {},
+    "/booking-managements": {},
+    "/cars-list": {},
     "/detail-page": {},
-    "/notifications": {}
+    "/user-list": {}
   }
 }
