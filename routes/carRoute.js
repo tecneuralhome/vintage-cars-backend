@@ -25,7 +25,7 @@ const upload = multer({
             return cb('Only .png, and .jpg and .jpeg and .gif and .mp4 format allowed', false);
         }
     },
-    limits:{ fileSize: 3 * 1024 * 1024}
+    limits:{ fileSize: 70 * 1024 * 1024}
 });
 
 router.post('/register-car-info', authValidation, upload.array("images"), carModuleValidation.carInfoValidation, controller.registerCarInfo);
