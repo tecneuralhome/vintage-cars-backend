@@ -8,7 +8,7 @@ var multer = require('multer');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-    	let folderName = req.originalUrl === "/cars/register-car-info" ? "carImages" : "sliderImages"
+    	let folderName = (req.originalUrl === "/cars/register-car-info" || req.originalUrl === "/cars/update-car-info") ? "carImages" : "sliderImages"
         cb(null, folderName);
     },
     filename: (req,file,cb) => {

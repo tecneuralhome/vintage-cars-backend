@@ -295,7 +295,6 @@ const getDistance = async(from, to) => {
 // This function is used to register car information.
 exports.updateCarInfo = async function (req, res) {
 	if (await commonUtils.isAdmin(req.decoded.userId)) {
-        console.log("req.body", req.body)
         let updatedData = {
         	name: req.body.name,
         	model: req.body.model,
@@ -304,15 +303,15 @@ exports.updateCarInfo = async function (req, res) {
 		    color: req.body.color,
 		    pagecontent: req.body.about_car,
 		}
-		if (req.files) {
-			let fileNames = []
+		if (req.files && req.files.length > 0) {
+			const [result] = await Promise.all([Car.findOne({_id: req.body.id}),]);
+			let fileNames = result && result.image ? result.image : [];
 			req.files.forEach((file) => {
 				fileNames.push(file.path);
 			});
 			updatedData.image = fileNames;
 		}
         Car.updateOne({ _id: req.body.id }, { $set: updatedData}).then((result) => {
-        	console.log("----- CAR INFO UPDATE RESULT -----", result);
 		    res.status(200).json({
 		      status:true,
 		      message:`Successfully updated car information`,
