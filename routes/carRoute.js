@@ -20,7 +20,7 @@ const upload = multer({
     storage: storage,
     fileFilter: (req, file, cb) => {
         console.log("===== MIME TYPE =====", file.mimetype);
-        if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg" || file.mimetype == "image/gif" || file.mimetype == "video/mp4") {
+        if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg" || file.mimetype == "image/gif" || file.mimetype == "video/mp4" || file.mimetype == "video/quicktime") {
             cb(null, true);
         } else {
             return cb('Only .png, and .jpg and .jpeg and .gif and .mp4 format allowed', false);
