@@ -133,6 +133,7 @@ exports.listUsers = async function (req, res) {
       email: users[i].email,
       number: users[i].number,
       usertype: users[i].usertype,
+      image: users[i].image
     })
   }
   res.status(200).json({
