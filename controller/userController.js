@@ -133,7 +133,7 @@ exports.listUsers = async function (req, res) {
       email: users[i].email,
       number: users[i].number,
       usertype: users[i].usertype,
-      image: users[i].image
+      image: users[i].image,
     })
   }
   res.status(200).json({
@@ -203,19 +203,11 @@ exports.updateUserInfo = async function (req, res) {
 };
 // This function is used to update users information.
 exports.updateContactInfo = async function (req, res) {
-  if (req.body.type !== "email" && req.body.type !== "number") {
-    return res.status(400).json({
-      status:false,
-      message:"Invalid request type"
-    })
-  }
   const verifyOtp = await isOtpMatched(req.body.number, req.body.otp)
   if (!verifyOtp.status) {
     return res.status(verifyOtp.statusCode).json({ status: false, message: verifyOtp.message });
   }
-  let updatedData = {number: req.body.number}
-  if (req.body.type === "email") updatedData = {email: req.body.email}
-  User.updateOne({ _id: req.decoded.userId }, { $set: updatedData}).then((result) => {
+  User.updateOne({ _id: req.decoded.userId }, { $set: {{number: req.body.number, email: req.body.email, password: bcrypt.hashSync(req.body.password, 10)}}}).then((result) => {
     res.status(200).json({
       status:true,
       message:`Successfully updated user contact information`,
