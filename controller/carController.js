@@ -312,10 +312,26 @@ exports.updateCarInfo = async function (req, res) {
 // This function is used to car information image.
 exports.deleteCarInfoImage = async function (req, res) {
 	if (await commonUtils.isAdmin(req.decoded.userId)) {
-		const result = commonUtils.deleteImage(req.body.imagePath);
-		res.status(result.status ? 200 : result.err ? 500 : 400).json({
-			status:false,
-			message: result.err ? result.err : result.message,
+		const [carData] = await Promise.all([
+			Car.findOne({_id: req.body.id}),
+		]);
+		let updatedData = []
+	    for (let i = 0; i < carData.image.length; i++) {
+	    	if (carData.image[i] !== req.body.imagePath) {
+	    		updatedData.push(carData.image[i])
+	    	}
+		}
+		Car.updateOne({ _id: req.body.id }, { $set: {image: updatedData}}).then((deleteResult) => {
+			const result = commonUtils.deleteImage(req.body.imagePath);
+			res.status(result.status ? 200 : result.err ? 500 : 400).json({
+				status:false,
+				message: result.err ? result.err : result.message,
+			})
+		}).catch((error) => {
+			res.status(500).json({
+				status:false,
+				message:"An error occurred while updating car information.",
+			})
 		})
 	} else {
 		res.status(400).json({
