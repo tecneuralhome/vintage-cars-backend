@@ -207,7 +207,8 @@ exports.updateContactInfo = async function (req, res) {
   if (!verifyOtp.status) {
     return res.status(verifyOtp.statusCode).json({ status: false, message: verifyOtp.message });
   }
-  User.updateOne({ _id: req.decoded.userId }, { $set: {{number: req.body.number, email: req.body.email, password: bcrypt.hashSync(req.body.password, 10)}}}).then((result) => {
+  let updateData = {number: req.body.number, email: req.body.email, password: bcrypt.hashSync(req.body.password, 10)}
+  User.updateOne({ _id: req.decoded.userId }, { $set: {updateData}}).then((result) => {
     res.status(200).json({
       status:true,
       message:`Successfully updated user contact information`,
