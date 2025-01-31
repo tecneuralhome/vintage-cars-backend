@@ -65,6 +65,7 @@ exports.deleteImage = (imagePath) => {
         }
     }
     fs.unlink(fullPath, (err) => {
+        console.log("CHECK 1")
         if (err) {
             console.error('Error deleting IMAGE file:', err);
             return {
@@ -77,4 +78,8 @@ exports.deleteImage = (imagePath) => {
             message: "File deleted successfully"
         }
     });
+    return {
+            status: true,
+            message: "File deleted successfully"
+        }
 }
