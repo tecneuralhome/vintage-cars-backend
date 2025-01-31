@@ -52,7 +52,9 @@ const getDistance = async(from, to) => {
 };
 
 exports.deleteImage = (imagePath) => {
-    const fullPath = path.join(__dirname, imagePath);
+    // const fullPath = path.join(__dirname, imagePath);
+    console.log("imagePath", imagePath)
+    const fullPath = path.join("/home/ubuntu/Dev/vintage-cars-backend/", imagePath);
     console.log("fullPath", fullPath)
     console.log("===== IMAGE FILE EXIST CHECK =====", fs.existsSync(fullPath));
     if (!fs.existsSync(fullPath)) {
