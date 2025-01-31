@@ -7,6 +7,7 @@
     "/booking-managements": {},
     "/cars-list": {},
     "/detail-page": {},
-    "/user-list": {}
+    "/user-list": {},
+    "/user-profile": {}
   }
 }
