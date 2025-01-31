@@ -117,35 +117,30 @@ exports.signUp = async function (req, res) {
 
 // This function is used to list users.
 exports.listUsers = async function (req, res) {
-  if (await commonUtils.isAdmin(req.decoded.userId)) {
-    const page = parseInt(req.query.page) || 1; // Default to page 1 if not provided
-    const limit = parseInt(req.query.limit) || 10; // Default to 10 if not provided
-    const skip = (page - 1) * limit;
-    const [users, totalUsers] = await Promise.all([
-        User.find().skip(skip).limit(limit),User.countDocuments(),
-    ]);
-    let usersList = []
-    for (let i = 0; i < users.length; i++) {
-      usersList.push({
-        id: users[i]._id,
-        username: users[i].username,
-        email: users[i].email,
-        number: users[i].number,
-        usertype: users[i].usertype,
-      })
-    }
-    res.status(200).json({
-      status:true,
-      message:"Successfully retrieved the users list",
-      users: usersList,
-      totalCount: totalUsers,
-    })
-  } else {
-    res.status(400).json({
-      status:false,
-      message:"Access denied",
+  const isAdmin = await commonUtils.isAdmin(req.decoded.userId);
+  const page = parseInt(req.query.page) || 1; // Default to page 1 if not provided
+  const limit = parseInt(req.query.limit) || 10; // Default to 10 if not provided
+  const skip = (page - 1) * limit;
+  let filter = isAdmin ? {} : {_id: req.decoded.userId}
+  const [users, totalUsers] = await Promise.all([
+    User.find(filter).skip(skip).limit(limit),User.countDocuments(),
+  ]);
+  let usersList = []
+  for (let i = 0; i < users.length; i++) {
+    usersList.push({
+      id: users[i]._id,
+      username: users[i].username,
+      email: users[i].email,
+      number: users[i].number,
+      usertype: users[i].usertype,
     })
   }
+  res.status(200).json({
+    status:true,
+    message:"Successfully retrieved the users list",
+    users: usersList,
+    totalCount: totalUsers,
+  })
 };
 
 // This function is used to delete users.

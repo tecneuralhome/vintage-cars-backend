@@ -2,8 +2,8 @@ const Car = require("../model/carModel.js");
 const Slider = require("../model/sliderModel.js");
 const Booking = require("../model/bookingModel.js");
 const commonUtils = require('../utils/commonUtils');
-const geolib = require("geolib");
-const axios = require("axios")
+const fs = require('fs');
+const path = require('path');
 
 const recoveryVanCharge = 100;
 
@@ -184,7 +184,7 @@ exports.deleteCarInfo = async function (req, res) {
 
 // This function is used to register car information.
 exports.booking = async function (req, res) {
-	const distance = await getDistance(req.body.from, req.body.to);
+	const distance = await commonUtils.getDistance(req.body.from, req.body.to);
 	let amount = await getPricingByName(req.body.carname);
 	if (distance > 100) amount += recoveryVanCharge;
 	if (distance === 0 || amount === 0) {
@@ -270,27 +270,6 @@ const getPricingByName = async(carName) => {
 	let result = await Car.findOne({ name: carName });
 	return result ? result.price : 0
 }
-const getCoordinates = async(location) => {
-    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}`;
-    try {
-        const response = await axios.get(url);
-        if (response.data.length > 0) {
-            const { lat, lon } = response.data[0];
-            return { latitude: parseFloat(lat), longitude: parseFloat(lon) };
-        } else {
-            return null;
-        }
-    } catch (error) {
-        return null;
-    }
-}
-const getDistance = async(from, to) => {
-	const fromLocation = await getCoordinates(from);
-	const toLocation = await getCoordinates(to);
-	if (!fromLocation || !toLocation) return 0;
-	const distanceInKilometers  = geolib.getDistance(fromLocation, toLocation) / 1000;
-	return distanceInKilometers;
-};
 
 // This function is used to register car information.
 exports.updateCarInfo = async function (req, res) {
@@ -328,5 +307,20 @@ exports.updateCarInfo = async function (req, res) {
 			status:false,
         	message: "Access denied",
         })
+	}
+}
+// This function is used to car information image.
+exports.deleteCarInfoImage = async function (req, res) {
+	if (await commonUtils.isAdmin(req.decoded.userId)) {
+		const result = commonUtils.deleteImage(req.body.imagePath);
+		res.status(result.status ? 200 : result.err ? 500 : 400).json({
+			status:false,
+			message: result.err ? result.err : result.message,
+		})
+	} else {
+		res.status(400).json({
+			status:false,
+			message: "Access denied",
+		})
 	}
 }

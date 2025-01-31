@@ -47,3 +47,15 @@ exports.bookingValidation =
 		next();
 	},
 ]
+exports.deleteCarInfoImageValidation =
+[
+	check('imagePath').trim().notEmpty().withMessage('Image path is required'),
+	// Middleware to handle validation results
+	(req, res, next) => {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			return res.status(400).json({ errors: errors.array() });
+		}
+		next();
+	},
+]
