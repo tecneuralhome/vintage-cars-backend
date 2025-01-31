@@ -5,6 +5,7 @@ var User = require("../model/userModel.js");
 const geolib = require("geolib");
 const axios = require("axios");
 var path = require('path');
+const fs = require('fs');
 
 // This function used to generate a random 6-digit OTP
 exports.generateOTP = () => {
