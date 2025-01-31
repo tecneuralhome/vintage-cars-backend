@@ -4,6 +4,7 @@ const config = require("../config/config")
 var User = require("../model/userModel.js");
 const geolib = require("geolib");
 const axios = require("axios");
+var path = require('path');
 
 // This function used to generate a random 6-digit OTP
 exports.generateOTP = () => {
@@ -52,6 +53,7 @@ const getDistance = async(from, to) => {
 
 exports.deleteImage = (imagePath) => {
     const fullPath = path.join(__dirname, imagePath);
+    console.log("fullPath", fullPath)
     console.log("===== IMAGE FILE EXIST CHECK =====", fs.existsSync(fullPath));
     if (!fs.existsSync(fullPath)) {
         return {
