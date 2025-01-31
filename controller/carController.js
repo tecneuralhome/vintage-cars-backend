@@ -325,6 +325,7 @@ exports.deleteCarInfoImage = async function (req, res) {
 		console.log("updatedData =====", updatedData)
 		Car.updateOne({ _id: req.body.id }, { $set: {image: updatedData}}).then((deleteResult) => {
 			const result = commonUtils.deleteImage(req.body.imagePath);
+			console.log("result", result)
 			res.status(result.status ? 200 : result.err ? 500 : 400).json({
 				status:false,
 				message: result.err ? result.err : result.message,
