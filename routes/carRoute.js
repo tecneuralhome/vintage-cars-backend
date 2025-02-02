@@ -33,7 +33,7 @@ router.post('/register-car-info', authValidation, upload.array("images"), carMod
 router.put('/update-car-info', authValidation, upload.array("images"), carModuleValidation.carInfoValidation, controller.updateCarInfo);
 router.post('/register-slider-info', authValidation, upload.single("images"), carModuleValidation.sliderInfoValidation, controller.registerSliderInfo);
 router.get('/car-list', controller.getCarsInfo);
-router.get('/slider-list', authValidation, controller.getSlidersInfo);
+router.get('/slider-list', controller.getSlidersInfo);
 router.delete('/delete-slider-info', authValidation, controller.deleteSliderInfo);
 router.post('/delete-car-info', authValidation, controller.deleteCarInfo);
 router.post('/delete-car-info-image', authValidation, carModuleValidation.deleteCarInfoImageValidation, controller.deleteCarInfoImage)
