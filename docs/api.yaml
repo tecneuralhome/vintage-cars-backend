@@ -410,7 +410,7 @@ paths:
                     description: List of slides
                     example: []
   /cars/delete-slider-info/:
-    delete:
+    post:
       summary: Delete slider information
       description: API to delete slider information
       requestBody:
