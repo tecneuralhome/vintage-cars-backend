@@ -142,7 +142,7 @@ exports.getSlidersInfo = async function (req, res) {
 // This function is used to delete a slider's info..
 exports.deleteSliderInfo = async function (req, res) {
 	if (await commonUtils.isAdmin(req.decoded.userId)) {
-		Slider.deleteOne({ _id: req.body.id }).then((result) => {
+		Slider.deleteOne({ position: req.body.position }).then((result) => {
 			res.status(200).json({
 				status:true,
 				message: `${result.deletedCount} Slider info is deleted successfully.`,

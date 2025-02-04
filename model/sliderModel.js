@@ -7,6 +7,7 @@ const sliderSchema = new mongoose.Schema({
   position: {
     type: Number,
     required: true,
+    unique:true,
   },
   createdAt: {
     type: Date,
