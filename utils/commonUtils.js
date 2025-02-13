@@ -44,7 +44,7 @@ const getCoordinates = async(location) => {
         return null;
     }
 }
-const getDistance = async(from, to) => {
+exports.getDistance = async(from, to) => {
     const fromLocation = await getCoordinates(from);
     const toLocation = await getCoordinates(to);
     if (!fromLocation || !toLocation) return 0;
