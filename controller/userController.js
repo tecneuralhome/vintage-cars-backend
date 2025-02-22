@@ -123,7 +123,7 @@ exports.listUsers = async function (req, res) {
   const skip = (page - 1) * limit;
   let filter = isAdmin ? {} : {_id: req.decoded.userId}
   const [users, totalUsers] = await Promise.all([
-    User.find(filter).skip(skip).limit(limit),User.countDocuments(),
+    User.find(filter).sort({createdAt: -1}).skip(skip).limit(limit),User.countDocuments(),
   ]);
   let usersList = []
   for (let i = 0; i < users.length; i++) {
