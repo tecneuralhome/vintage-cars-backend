@@ -106,6 +106,7 @@ exports.getCarsInfo = async function (req, res) {
 			color: result[i].color,
 			image: result[i].image,
 			pagecontent: result[i].pagecontent,
+			status: result[i].status,
 			createdAt: result[i].createdAt,
 		})
     }
