@@ -23,6 +23,7 @@ exports.registerCarInfo = async function (req, res) {
 		    color: req.body.color,
 		    image: fileNames,
 		    pagecontent: req.body.about_car,
+			status: req.body.status,
 		});
 		carInfo.save().then(async (result) => {
 			console.log("CAR INFO RESULT", result);
@@ -281,6 +282,7 @@ exports.updateCarInfo = async function (req, res) {
 		    brand: req.body.brand,
 		    color: req.body.color,
 		    pagecontent: req.body.about_car,
+			status: req.body.status,
 		}
 		if (req.files && req.files.length > 0) {
 			const [result] = await Promise.all([Car.findOne({_id: req.body.id}),]);

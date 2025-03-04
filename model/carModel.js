@@ -28,6 +28,10 @@ const carSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  status: {
+    type: Number,
+    required: true,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

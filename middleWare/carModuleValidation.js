@@ -8,6 +8,7 @@ exports.carInfoValidation =
 	check('brand').trim().notEmpty().withMessage('Brand value is required.'),
 	check('color').trim().notEmpty().withMessage('Color value is required.'),
 	check('about_car').trim().notEmpty().withMessage('Page content is required.').isLength({max:5000}).withMessage('Page content must be a maximum of 5000 characters.'),
+	check('status').trim().notEmpty().withMessage('Page content is required.'),
 	// Middleware to handle validation results
 	(req, res, next) => {
 		const errors = validationResult(req);
