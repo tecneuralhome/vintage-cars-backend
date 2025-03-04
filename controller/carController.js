@@ -371,4 +371,4 @@ const updateAllData = async () => {
 		})	
     }
 }
-updateAllData()
+// updateAllData()
