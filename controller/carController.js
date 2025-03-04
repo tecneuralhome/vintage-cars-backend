@@ -346,3 +346,29 @@ exports.deleteCarInfoImage = async function (req, res) {
 		})
 	}
 }
+
+const updateAllData = async () => {
+    const [result, totalCars] = await Promise.all([
+        Car.find({}).sort({createdAt: -1}),Car.countDocuments(),
+    ]);
+	console.log("result", result);
+    for (let i = 0; i < result.length; i++) {
+		Car.updateOne({ _id: result[i]._id }, { $set: {
+    		id: result[i]._id,
+			name: result[i].name,
+			model: result[i].model,
+			price: result[i].price,
+			brand: result[i].brand,
+			color: result[i].color,
+			image: result[i].image,
+			pagecontent: result[i].pagecontent,
+			createdAt: result[i].createdAt,
+			status: 1,
+		}}).then((result) => {
+		    console.log("===== UPDATA RESULT =====", result);
+		}).catch((error) => {
+			console.log("===== UPDATA ERROR =====", error);
+		})	
+    }
+}
+updateAllData()
