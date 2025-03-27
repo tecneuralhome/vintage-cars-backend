@@ -52,6 +52,7 @@ exports.generateOTP = async function (req, res) {
   }
   if (req.body.type === "register") {
     const registeredUser = await User.findOne({ number: req.body.number })
+    console.log("===== REGISTERED USER =====", registeredUser);
     if (registeredUser) {
       return res.status(400).json({
         status:false,
