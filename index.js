@@ -7,6 +7,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = Yaml.load("./docs/api.yaml");
 const dotenv = require("dotenv");
 const path = require('path');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 dotenv.config();
 const config = require("./config/config")
 var userRoute = require("./routes/userRoute");
@@ -26,6 +27,12 @@ app.use('/carImages', express.static('carImages'));
 app.use('/sliderImages', express.static('sliderImages'));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(cors({origin: '*'}));
+app.use('*', createProxyMiddleware({
+  target: 'http://54.183.73.207:8080',
+  changeOrigin: true,
+  secure: false,  // Avoid SSL issues in development
+}));
+
 // app.use(cors({origin: 'http://localhost:4200'}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/cars', carRoute);
