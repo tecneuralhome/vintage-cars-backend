@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   description: API documentation for Vintage Cars
 servers:
-  - url: http://54.160.212.90:8080
+  - url: http://54.183.73.207:8080
   - url: http://localhost:8080
 components:
   securitySchemes:
